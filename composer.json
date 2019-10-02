@@ -1,0 +1,11 @@
+{
+    "name": "mfarahani/telegram-channel-crawl",
+    "description": "scrapping all data and information public channels telegram",
+    "authors": [
+        {
+            "name": "Mohsen Farahani",
+            "email": "dev.farahani@gmail.com"
+        }
+    ],
+    "require": {}
+}

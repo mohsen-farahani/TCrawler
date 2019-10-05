@@ -2,15 +2,11 @@
 
 namespace Mfarahani\TelegramChannelCrawl;
 
-use Goutte\Client;
-use GuzzleHttp\Client as GuzzleHttpClient;
-
 class TCrawl
 {
 
     private $httpProxy;
     private $channelName;
-
 
     public function __call($name, $arguments)
     {
@@ -31,27 +27,34 @@ class TCrawl
         $this->channelName = $channelName;
     }
 
-
     public function getInfo()
     {
-       $class = new InformationChannel($this->channelName, $this->httpProxy);
-       
-       return $class->getInfo();
+        $class = new InformationChannel($this->channelName, $this->httpProxy);
+
+        return $class->getInfo();
     }
 
-    public function lastId()
+    public function getLastId()
     {
+        $class = new MessageChannel($this->channelName, $this->httpProxy);
+
+        return $class->getLastId();
 
     }
 
-    public function getLatestMessages()
+    public function getLatestMessages(int $fromId = null)
     {
+        $class = new MessageChannel($this->channelName, $this->httpProxy);
+
+        return $class->getLatestMessages($fromId);
 
     }
 
     public function getLastMessgae()
     {
-        
+        $class = new MessageChannel($this->channelName, $this->httpProxy);
+
+        return $class->getLastMessgae();
     }
 
 }

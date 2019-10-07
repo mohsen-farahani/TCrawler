@@ -13,16 +13,16 @@ class TemplateBuilderService
     /**
      * createTemplate function
      *
-     * @param object $info
+     * @param mixed[] $info
      * @param string $template
      * @return SourceTemplate
      */
-    public function createTemplate(object $info, string $template): SourceTemplate
+    public function createTemplate(array $info, string $template): SourceTemplate
     {
         $SourceTemplate = SourceTemplate::create([
-            'title'    => $info->title,
-            'username' => Str::after($info->username, "@"),
-            'url'      => CrwalerService::BASEURL . Str::after($info->username, "@"),
+            'title'    => $info["title"],
+            'username' => Str::after($info["username"], "@"),
+            'url'      => CrwalerService::BASEURL . Str::after($info["username"], "@"),
             'template' => base64_encode($template),
             'status'   => true,
         ]);

@@ -1,11 +1,28 @@
 {
-    "name": "mfarahani/telegram-channel-crawl",
-    "description": "scrapping all data and information public channels telegram",
+    "name": "mfarahani/tcrawl",
+    "description": "scrapping all data and information public channels telegram & create object from scrapping with template",
     "authors": [
         {
             "name": "Mohsen Farahani",
             "email": "dev.farahani@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=7.1.0",
+        "laravel/framework": "5.5.*",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Mfarahani\\TCrawl\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mfarahani\\TCrawl\\TCrawlServiceProvider"
+            ]
+        }
+    }
 }

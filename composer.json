@@ -9,11 +9,10 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
+        "php": ">=7.1",
         "laravel/framework": "5.5.*",
         "guzzlehttp/guzzle": "~6.0"
     },
-    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Mfarahani\\TCrawl\\": "src"

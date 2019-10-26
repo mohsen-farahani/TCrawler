@@ -27,8 +27,11 @@ $tCrawl = new TCrawler();
 $tCrawl->setProxy("http://username:password@host:port");
 $tCrawl->setChannel("channelname telegram");
 $info           = $tCrawl->crawler()->getInfo();
-$lastMessgae    = $tCrawl->crawler()->getLastMessgae($formWithTemplate, $channelName);
-$latestMessages = $tCrawl->crawler()->getLatestMessages($formWithTemplate, $channelName, $fromId);
+
+$formWithTemplate = false; //you can use 'true' or 'false' for generate template
+
+$lastMessgae    = $tCrawl->crawler()->getLastMessage($formWithTemplate);
+$latestMessages = $tCrawl->crawler()->getLatestMessages($formWithTemplate, $fromId);
 
 
 dump($info , $lastMessgae , $latestMessages );
@@ -40,9 +43,9 @@ you can set template and generate message with your template
 
 - Specify your template by inserting it between the [[***]]
 
-| example template :
+example template :
 ```
-    $template = "phone number is : [[phone]] , name : [[name]]"
+$template = "phone number is : [[phone]] , name : [[name]]"
 ```
 
 ```
@@ -59,8 +62,6 @@ $tCrawl->templateBuilder()->getTemplate("channelname telegram");
 $tCrawl->templateBuilder()->build($username, $message);
 
 ```
-
-### if you can getLastMessgae(true) or getLatestMessages(true) , generate message with your template
 
 
 

@@ -55,6 +55,25 @@ class MessageChannel
 
             if ($fromId) {
                 if ($id > $fromId) {
+                    try {
+
+                        $message = $parentCrawler->filter('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->text();
+                        if ($formWithTemplate === true) {
+                            $templateBuilderService = new TemplateBuilderService();
+                            $message                = $templateBuilderService->build($channelName, $message);
+                        }
+
+                        $node['text'] = $message;
+                        $node['id']   = $id;
+
+                    } catch (\Throwable $e) {
+                        // do nothing... php will ignore and continue
+                    }
+
+                }
+            } else {
+                try {
+
                     $message = $parentCrawler->filter('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->text();
                     if ($formWithTemplate === true) {
                         $templateBuilderService = new TemplateBuilderService();
@@ -63,16 +82,10 @@ class MessageChannel
 
                     $node['text'] = $message;
                     $node['id']   = $id;
-                }
-            } else {
-                $message = $parentCrawler->filter('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->text();
-                if ($formWithTemplate === true) {
-                    $templateBuilderService = new TemplateBuilderService();
-                    $message                = $templateBuilderService->build($channelName, $message);
-                }
 
-                $node['text'] = $message;
-                $node['id']   = $id;
+                } catch (\Throwable $e) {
+                    // do nothing... php will ignore and continue
+                }
             }
 
             $result->push($node);
@@ -83,13 +96,13 @@ class MessageChannel
     }
 
     /**
-     * getLastMessgae function
+     * getLastMessage function
      *
      * @param boolean $formWithTemplate
      * @param string $channelName
      * @return mixed[]
      */
-    public function getLastMessgae(bool $formWithTemplate = false, string $channelName): array
+    public function getLastMessage(bool $formWithTemplate = false, string $channelName): array
     {
 
         $lastNode = $this->crawler->filter('.force_userpic.js-widget_message')->last();

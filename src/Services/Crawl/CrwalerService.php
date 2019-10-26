@@ -50,9 +50,9 @@ class CrwalerService
         return (new MessageChannel($this->crawler))->getLatestMessages($formWithTemplate, $this->channelName, $fromId);
 
     }
-    public function getLastMessgae(bool $formWithTemplate = false)
+    public function getLastMessage(bool $formWithTemplate = false)
     {
-        return (new MessageChannel($this->crawler))->getLastMessgae($formWithTemplate, $this->channelName);
+        return (new MessageChannel($this->crawler))->getLastMessage($formWithTemplate, $this->channelName);
 
     }
 

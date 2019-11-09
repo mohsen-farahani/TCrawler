@@ -57,13 +57,15 @@ class MessageChannel
                 if ($id > $fromId) {
                     try {
 
-                        $message = $parentCrawler->filter('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->text();
+                        $message     = $parentCrawler->filter('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->text();
+                        $htmlMessage = $parentCrawler->filter('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->html();
                         if ($formWithTemplate === true) {
                             $templateBuilderService = new TemplateBuilderService();
                             $message                = $templateBuilderService->build($channelName, $message);
                         }
 
                         $node['text'] = $message;
+                        $node['html'] = $htmlMessage;
                         $node['id']   = $id;
 
                     } catch (\Throwable $e) {
@@ -74,13 +76,15 @@ class MessageChannel
             } else {
                 try {
 
-                    $message = $parentCrawler->filter('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->text();
+                    $message     = $parentCrawler->filter('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->text();
+                    $htmlMessage = $parentCrawler->filter('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->html();
                     if ($formWithTemplate === true) {
                         $templateBuilderService = new TemplateBuilderService();
                         $message                = $templateBuilderService->build($channelName, $message);
                     }
 
                     $node['text'] = $message;
+                    $node['html'] = $htmlMessage;
                     $node['id']   = $id;
 
                 } catch (\Throwable $e) {
@@ -107,21 +111,25 @@ class MessageChannel
 
         $lastNode = $this->crawler->filter('.force_userpic.js-widget_message')->last();
 
-        $message = $lastNode->children('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->text();
+        $message     = $lastNode->children('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->text();
+        $htmlMessage = $lastNode->children('.tgme_widget_message_bubble')->children('.tgme_widget_message_text.js-message_text')->html();
+
+        $result = [
+            "message"     => $message,
+            "htmlMessage" => $htmlMessage,
+        ];
 
         if ($formWithTemplate === true) {
             $templateBuilderService = new TemplateBuilderService();
             $message                = $templateBuilderService->build($channelName, $message);
 
-            return [
-                "message" => $message,
+            $result = [
+                "message"     => $message,
+                "htmlMessage" => $htmlMessage,
             ];
-
         }
 
-        return [
-            "message" => $message,
-        ];
+        return $result;
 
     }
 

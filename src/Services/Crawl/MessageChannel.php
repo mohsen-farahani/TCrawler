@@ -64,9 +64,10 @@ class MessageChannel
                             $message                = $templateBuilderService->build($channelName, $message);
                         }
 
-                        $node['text'] = $message;
-                        $node['html'] = $htmlMessage;
-                        $node['id']   = $id;
+                        $node['text']     = $message;
+                        $node['html']     = $htmlMessage;
+                        $node['id']       = $id;
+                        $node['datetime'] = new \DateTime($parentCrawler->filter('time')->attr('datetime'));
 
                     } catch (\Throwable $e) {
                         // do nothing... php will ignore and continue
@@ -83,9 +84,10 @@ class MessageChannel
                         $message                = $templateBuilderService->build($channelName, $message);
                     }
 
-                    $node['text'] = $message;
-                    $node['html'] = $htmlMessage;
-                    $node['id']   = $id;
+                    $node['text']     = $message;
+                    $node['html']     = $htmlMessage;
+                    $node['id']       = $id;
+                    $node['datetime'] = new \DateTime($parentCrawler->filter('time')->attr('datetime'));
 
                 } catch (\Throwable $e) {
                     // do nothing... php will ignore and continue
